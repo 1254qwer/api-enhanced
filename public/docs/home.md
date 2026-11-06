@@ -4542,6 +4542,26 @@ qrCodeStatus:20,detailReason:0 验证成功 qrCodeStatus:21,detailReason:0 二�
 
 `audioFP`: 音频指纹,参考项目调用例子获取
 
+### 听歌识曲（v1）
+
+说明: 使用此接口,上传音频文件或者麦克风采集声音可识别对应歌曲信息
+
+AFP: 音频指纹识别；HFP: 哼唱识别；ASR: 读歌词识曲
+
+示例见 `/audio_recognition_demo/index.html` (项目文件: `public/audio_recognition_demo/index.html`)。
+
+每次请求在 URL 中附加 `timestamp=当前毫秒时间戳`,避免复用上次音频的缓存结果。
+
+**接口地址及必选参数：**
+
+- `/audio/recognition/afp`: `duration` + `fingerPrint` (AFP Base64 指纹)。
+- `/audio/recognition/hfp`: `fingerPrint` (HFP Base64 指纹)。
+- `/audio/recognition/asr`: `recordAudio` (Base64 AAC-LC 音频,**MP4 容器**)。
+
+`duration` 为音频时长,单位秒。AFP/HFP 需提交各自算法生成的指纹;ASR 的协议格式名固定为 `AAC`,实际音频为 MP4,接口不做编码转换。
+
+**可选参数：** `sessionId` 省略时随机生成;AFP 的 `times` 默认 `1`。
+
 ### 根据 nickname 获取 userid
 
 说明: 使用此接口,传入用户昵称,可获取对应的用户 id,支持批量获取,多个昵称用`分号(;)`隔开

@@ -296,6 +296,26 @@ export function audio_match(
   } & RequestBaseConfig,
 ): Promise<Response>
 
+export interface AudioRecognitionConfig extends RequestBaseConfig {
+  sessionId?: string
+}
+
+export function audio_recognition_afp(
+  params: AudioRecognitionConfig & {
+    fingerPrint: string
+    duration: string | number
+    times?: string | number
+  },
+): Promise<Response>
+
+export function audio_recognition_hfp(
+  params: AudioRecognitionConfig & { fingerPrint: string },
+): Promise<Response>
+
+export function audio_recognition_asr(
+  params: AudioRecognitionConfig & { recordAudio: string },
+): Promise<Response>
+
 export function avatar_upload(
   params: ImageUploadConfig & RequestBaseConfig,
 ): Promise<Response>
